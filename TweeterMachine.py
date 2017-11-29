@@ -1,6 +1,5 @@
 import tweepy
-import requests
-import json
+from Locator import Locator
 
 class TweeterMachine:
 
@@ -19,26 +18,31 @@ class TweeterMachine:
     api.wait_on_rate_limit = True
     api.wait_on_rate_limit_notify = True
 
-    #Your geolocation
-    latitude = 0.0
-    longitude = 0.0
-    myIP = ''
+
+
+    #tweeted songs
+    songSet = set()
+
+    location = Locator()
 
     def __init__(self):
-        self.find_location()
+        self.get_tweets()
 
-    def find_location(self):
-        send_url = 'http://freegeoip.net/json'
-        r = requests.get(send_url)
-        j = json.loads(r.text)
-        self.latitude = j['latitude']
-        self.longitude = j['longitude']
-        self.myIP = j['ip']
+    def get_tweets(self):
 
-def main():
-    twitterApi = TweeterMachine()
+    #finds and adds the songs that have been tweeted
+        for tweet in tweepy.Cursor(self.api.search, q = '#SpotItForMe', lang = 'en', geocode = '{},{},3.5km'.format(self.location.get_latitude()
+                ,self.location.get_longitude())).items():
 
-    print('{}\t{}\t{}'.format(twitterApi.latitude,twitterApi.longitude,twitterApi.myIP))
+            if len(tweet.text.split(' , ')) > 1 :
+                self.songSet.add(tweet.text.split(' , ')[1])
 
+    def get_songs(self):
+        return self.songSet
 
-if __name__ == '__main__': main()
+# def main():
+#     twitterApi = TweeterMachine()
+#     print(twitterApi.get_songs())
+#
+#
+# if __name__ == '__main__': main()
