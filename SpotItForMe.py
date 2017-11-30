@@ -37,6 +37,4 @@ def main():
         if input('Do you want to continue? Y/N: ') == 'N':
             break
 
-
-
 if __name__ == '__main__': main()

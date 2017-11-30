@@ -6,7 +6,7 @@ class Spotiphy:
 
     SPOTIPY_CLIENT_ID = '57cb04fee761493cbcd31ab4274a5a39'
 
-    SPOTIPY_CLIENT_SECRET = '0f0fb4b004134a60ab59d33d3481f352'
+    SPOTIPY_CLIENT_SECRET = '67d9f48c5f604e0da8ad347cffda1361'
 
     SPOTIPY_REDIRECT_URI = 'http://hangoutapp.tech'
 
