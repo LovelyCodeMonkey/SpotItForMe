@@ -40,7 +40,7 @@ class TweeterMachine:
                                    geocode = '{},{},10km'.format(self.location.get_latitude(),self.location.get_longitude())).items():
             print(tweet)
             if len(tweet.text.split(' , ')) > 1 :
-                self.songSet.add(tweet.text.split(' , ')[1])
+                self.songSet.add(tweet.text.split(' , ')[1].title())
 
     def get_songs(self):
         print(self.songSet)

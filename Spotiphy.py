@@ -36,17 +36,20 @@ class Spotiphy:
 
         if self.token:
 
+            print('song set {}'.format(songSet))
             for song in songSet:
                 lst = song.split(' - ')
                 artistName = lst[0]
-                results = self.sp.search(q=artistName, limit=20)
+                results = self.sp.search(q=artistName)
 
                 for i in results['tracks']['items']:
                     if i['name'] == lst[1]:
                         self.track_id.append(i['id'])
+                        print('track id: {}'.format(self.track_id))
 
     def add_song(self):
 
         if self.token:
             self.sp.trace = False
+            print('{}\t{}\t{}'.format(self.username, self.playlist_id, self.track_id))
             self.sp.user_playlist_add_tracks(self.username, self.playlist_id, self.track_id)
