@@ -23,16 +23,21 @@ class TweeterMachine:
     #tweeted songs
     songSet = set()
 
+    #finding location
     location = Locator()
 
+    #your hashtag
+
+    hashtag = input('Please Enter your selected Hashtag: ')
+
     def __init__(self):
-        self.get_tweets()
+        pass
 
     def get_tweets(self):
 
     #finds and adds the songs that have been tweeted
-        for tweet in tweepy.Cursor(self.api.search, q = '#SpotItForMe', lang = 'en', geocode = '{},{},3.5km'.format(self.location.get_latitude()
-                ,self.location.get_longitude())).items():
+        for tweet in tweepy.Cursor(self.api.search, q = '{}'.format(self.hashtag), lang = 'en',
+                                   geocode = '{},{},10km'.format(self.location.get_latitude(),self.location.get_longitude())).items():
 
             if len(tweet.text.split(' , ')) > 1 :
                 self.songSet.add(tweet.text.split(' , ')[1])
@@ -40,9 +45,13 @@ class TweeterMachine:
     def get_songs(self):
         return self.songSet
 
+    def reset_songSet(self):
+        self.songSet.clear()
+
 # def main():
 #     twitterApi = TweeterMachine()
-#     print(twitterApi.get_songs())
+#     twitterApi.set_Hashtag(input("set: "))
+#     print(twitterApi.get_Hashtag())
 #
 #
 # if __name__ == '__main__': main()
