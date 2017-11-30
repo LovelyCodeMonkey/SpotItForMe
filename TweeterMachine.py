@@ -38,14 +38,14 @@ class TweeterMachine:
     #finds and adds the songs that have been tweeted
         for tweet in tweepy.Cursor(self.api.search, q = '{}'.format(self.hashtag), lang = 'en',
                                    geocode = '{},{},10km'.format(self.location.get_latitude(),self.location.get_longitude())).items():
-            print(tweet)
+            # print(tweet)
             if len(tweet.text.split(' , ')) > 1 :
                 self.songSet.add(tweet.text.split(' , ')[1].title())
 
     def get_songs(self):
-        print(self.songSet)
+        # print(self.songSet)
         return self.songSet
 
     def reset_songSet(self):
         self.songSet.clear()
-        print(self.songSet)
+        # print(self.songSet)

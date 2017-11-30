@@ -36,7 +36,7 @@ class Spotiphy:
 
         if self.token:
 
-            print('song set {}'.format(songSet))
+            # print('song set {}'.format(songSet))
             for song in songSet:
                 lst = song.split(' - ')
                 artistName = lst[0]
@@ -51,5 +51,8 @@ class Spotiphy:
 
         if self.token:
             self.sp.trace = False
-            print('{}\t{}\t{}'.format(self.username, self.playlist_id, self.track_id))
-            self.sp.user_playlist_add_tracks(self.username, self.playlist_id, self.track_id)
+            # print('{}\t{}\t{}'.format(self.username, self.playlist_id, self.track_id))
+            if len(self.track_id) > 0:
+                self.sp.user_playlist_add_tracks(self.username, self.playlist_id, self.track_id)
+            else:
+                print('Sorry no tracks where found at this time')
