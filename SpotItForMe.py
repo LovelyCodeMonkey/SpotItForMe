@@ -32,9 +32,9 @@ def main():
         spot.config_playlist()
 
         print('program waiting until next iteration...')
-        time.sleep(600)
+        time.sleep(60)
 
-        if input('Do you want to continue? Y/N: ') == 'Y':
+        if input('Do you want to continue? Y/N: ') == 'N':
             break
 
 

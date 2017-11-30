@@ -10,13 +10,14 @@ class Spotiphy:
 
     SPOTIPY_REDIRECT_URI = 'http://hangoutapp.tech'
 
-    username = input('Please Enter Your Username: ')
-    playlistName = input('Please Enter the Name of your Playlist: ')
+    username = input('Please Enter Your Spotify Username: ')
+    playlistName = input('Please Enter the Name of your Spotify Playlist: ')
     playlist_id = ''
     track_id = list()
     scope = 'playlist-modify-public'
     token = util.prompt_for_user_token(username, scope, SPOTIPY_CLIENT_ID, SPOTIPY_CLIENT_SECRET,
                                        SPOTIPY_REDIRECT_URI)
+    sp = spotipy.Spotify(auth=token)
 
     def __init__(self):
 
@@ -25,8 +26,7 @@ class Spotiphy:
     def set_playListID(self):
 
         if self.token:
-            sp = spotipy.Spotify(auth=self.token)
-            playlists = sp.user_playlists(self.username)
+            playlists = self.sp.user_playlists(self.username)
 
             for playlist in playlists['items']:
                 if str(playlist['name']) == self.playlistName:
@@ -35,12 +35,11 @@ class Spotiphy:
     def set_trackID(self, songSet):
 
         if self.token:
-            sp = spotipy.Spotify(auth=self.token)
 
             for song in songSet:
                 lst = song.split(' - ')
                 artistName = lst[0]
-                results = sp.search(q=artistName, limit=20)
+                results = self.sp.search(q=artistName, limit=20)
 
                 for i in results['tracks']['items']:
                     if i['name'] == lst[1]:
@@ -49,6 +48,5 @@ class Spotiphy:
     def add_song(self):
 
         if self.token:
-            sp = spotipy.Spotify(auth=self.token)
-            sp.trace = False
-            sp.user_playlist_add_tracks(self.username, self.playlist_id, self.track_id)
+            self.sp.trace = False
+            self.sp.user_playlist_add_tracks(self.username, self.playlist_id, self.track_id)
