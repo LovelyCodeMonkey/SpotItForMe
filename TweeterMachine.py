@@ -47,11 +47,3 @@ class TweeterMachine:
 
     def reset_songSet(self):
         self.songSet.clear()
-
-# def main():
-#     twitterApi = TweeterMachine()
-#     twitterApi.set_Hashtag(input("set: "))
-#     print(twitterApi.get_Hashtag())
-#
-#
-# if __name__ == '__main__': main()

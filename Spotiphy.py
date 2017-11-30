@@ -20,19 +20,7 @@ class Spotiphy:
 
     def __init__(self):
 
-        pass
-
-
-
-    def get_Songs(self):
-        self.songs = self.tweets.get_songs()
-        return self.songs
-
-    def set_Details(self, details):
-
-        detail = details.split(',')
-        self.username = detail[0]
-        self.playlistName = detail[1]
+        self.set_playListID()
 
     def set_playListID(self):
 
